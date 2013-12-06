@@ -1,27 +1,30 @@
 Autoloading Standard
 ====================
 
-Das folgende Dokument beschreibt die Voraussetzungen, welche eingehalten werden müssen,
-um die Kompatibilität mit dem Autoloader zu gewährleisten.
+Im folgenden werden die für eine Autoloader-Interoperabilität zwingenden
+Anforderungen beschrieben.
 
-Verpflichtend
----------
+Zwingend
+--------
 
 * Ein komplett ausgeschriebener Namespace mit Klasse muss die folgende
-  Struktur einhalten `\<Anbieter Name>\(<Namespace>\)*<Name der Klasse>`
-* Jeder Namespace muss den übergeordneten Namespace ("Anbieter Namen") besitzen.
+  Struktur einhalten `\<Anbieterbezeichnung>\(<Namespace>\)*<Klassenname>`
+* Jeder Namespace muss auf höchster Ebene einen Namespace
+  ("Anbieterbezeichnung") haben.
 * Jeder Namespace kann beliebig viele Unter-Namespaces besitzen.
-* Jeder Trenner für Namespaces wird beim Laden vom Dateisystem zu einem `DIRECTORY_SEPARATOR` konvertiert.
-* Jedes `_` Zeichen im KLASSENNAMEN wird zu einem
-  `DIRECTORY_SEPARATOR` konvertiert. Das Zeichen `_` hat keine besondere Bedeutung in einem
+* Jeder Trenner für Namespaces wird beim Laden vom Dateisystem zu einem
+  `DIRECTORY_SEPARATOR` konvertiert.
+* Jedes `_` Zeichen im KLASSENNAMEN wird zu einem `DIRECTORY_SEPARATOR`
+  konvertiert. Das Zeichen `_` hat keine besondere Bedeutung in einem
   Namespace.
-* Der komplette Namespace wird mit dem Namen der Klasse und dem Suffix `.php` kombiniert,
-  wenn dieser vom Dateisystem geladen wird.
-* Alphabetische Zeichen in Anbieternamen, Namespaces und Klassennamen können
-  in beliebiger Kombination aus Groß- und Kleinschreibung bestehen.
+* Der komplette Namespace und der Name der Klasse wird mit dem Suffix `.php`
+  versehen, wenn diese vom Dateisystem geladen wird.
+* Alphabetische Zeichen in Anbieterbezeichnungen, Namespaces und
+  Klassennamen können in beliebiger Kombination aus Groß- und
+  Kleinschreibung bestehen.
 
 Beispiele
---------
+---------
 
 * `\Doctrine\Common\IsolatedClassLoader` => `/path/to/project/lib/vendor/Doctrine/Common/IsolatedClassLoader.php`
 * `\Symfony\Core\Request` => `/path/to/project/lib/vendor/Symfony/Core/Request.php`
@@ -29,22 +32,22 @@ Beispiele
 * `\Zend\Mail\Message` => `/path/to/project/lib/vendor/Zend/Mail/Message.php`
 
 Unterstriche in Namespaces und Klassennamen
------------------------------------------
+-------------------------------------------
 
 * `\namespace\package\Class_Name` => `/path/to/project/lib/vendor/namespace/package/Class/Name.php`
 * `\namespace\package_name\Class_Name` => `/path/to/project/lib/vendor/namespace/package_name/Class/Name.php`
 
-Der Standard, welcher hier durch uns gesetzt wird, repräsentiert die minimale Anforderung,
-um eine Kompatibilität hinsichtlich Autoloader zu gewährleisten.
-Mit der Nutzung der Beispiel-Implementation des SplClassLoaders (verfügbar ab PHP 5.3)
-kann getestet werden, ob die Standards eingehalten werden.
+Der hier gesetzte Standard repräsentiert den kleinsten gemeinsamen Nenner
+für schmerzfreie Autoloader-Interoperabilität. Zur Überprüfung, ob man
+diesen Standards genügt, kann die nun folgende, beispielhafte Implementation
+eines SplClassLoaders verwendet werden, welche Klassen ab PHP 5.3 laden kann.
 
 Beispiel-Implementation
-----------------------
+-----------------------
 
-Das Beispiel zeigt eine Beispielfunktion, welche auf einfache Weise demonstriert, wie die
-oben erklärten Standards in einem Autoloader implementiert werden können:
-
+Es folgt eine Beispielfunktion, die demonstriert, wie den oben
+vorgeschlagenen Standards entsprechende Klassen mit einem Autoloader
+geladen werden können.
 
 ```php
 <?php
@@ -68,10 +71,10 @@ function autoload($className)
 SplClassLoader Implementation
 -----------------------------
 
-Das folgende Gist beinhaltet eine Beispiel-Implementation des SplClassLoaders.
-Die Implementation kann genutzt werden, um Klassen zu laden, sofern diese die
-oben erklärten Standards einhalten. Derzeit wird PSR-0
-empfohlen um PHP Klassen (ab PHP 5.3) zu laden, sofern diese die oben erklärten Standards einhalten.
+Das folgende Gist zeigt eine Beispiel-Implementation des
+SplClassLoaders, mit deren Hilfe Klassen geladen werden können, wenn sie den
+vorgeschlagenen Autoloader-Standards genügen. Es ist derzeit empfohlene
+Methode, um in PHP 5.3 Klassen zu laden, die diesen Standards entsprechen.
 
 * [http://gist.github.com/221634](http://gist.github.com/221634)
 
