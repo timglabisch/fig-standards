@@ -5,7 +5,7 @@ Das folgende Dokument beschreibt die Voraussetzungen, welche eingehalten werden 
 um die Kompatibilität mit dem Autoloader zu gewährleisten.
 
 Verpflichtend
----------
+-------------
 
 * Ein komplett ausgeschriebener Namespace mit Klasse muss die folgende
   Struktur einhalten `\<Anbieter Name>\(<Namespace>\)*<Name der Klasse>`
@@ -21,7 +21,7 @@ Verpflichtend
   in beliebiger Kombination aus Groß- und Kleinschreibung bestehen.
 
 Beispiele
---------
+---------
 
 * `\Doctrine\Common\IsolatedClassLoader` => `/path/to/project/lib/vendor/Doctrine/Common/IsolatedClassLoader.php`
 * `\Symfony\Core\Request` => `/path/to/project/lib/vendor/Symfony/Core/Request.php`
@@ -29,7 +29,7 @@ Beispiele
 * `\Zend\Mail\Message` => `/path/to/project/lib/vendor/Zend/Mail/Message.php`
 
 Unterstriche in Namespaces und Klassennamen
------------------------------------------
+-------------------------------------------
 
 * `\namespace\package\Class_Name` => `/path/to/project/lib/vendor/namespace/package/Class/Name.php`
 * `\namespace\package_name\Class_Name` => `/path/to/project/lib/vendor/namespace/package_name/Class/Name.php`
@@ -40,7 +40,7 @@ Mit der Nutzung der Beispiel-Implementation des SplClassLoaders (verfügbar ab P
 kann getestet werden, ob die Standards eingehalten werden.
 
 Beispiel-Implementation
-----------------------
+-----------------------
 
 Das Beispiel zeigt eine Beispielfunktion, welche auf einfache Weise demonstriert, wie die
 oben erklärten Standards in einem Autoloader implementiert werden können:
@@ -68,10 +68,9 @@ function autoload($className)
 SplClassLoader Implementation
 -----------------------------
 
-Das folgende Gist beinhaltet eine Beispiel-Implementation des SplClassLoaders.
+Das folgende Gist beinhaltet eine beispielhafte Beispiel-Implementation des SplClassLoaders.
 Die Implementation kann genutzt werden, um Klassen zu laden, sofern diese die
-oben erklärten Standards einhalten. Derzeit wird PSR-0
-empfohlen um PHP Klassen (ab PHP 5.3) zu laden, sofern diese die oben erklärten Standards einhalten.
+oben erklärten Standards einhalten. Derzeit wird PSR-0 empfohlen, um PHP Klassen (ab PHP 5.3) zu laden, sofern diese die oben erklärten Standards einhalten.
 
 * [http://gist.github.com/221634](http://gist.github.com/221634)
 
